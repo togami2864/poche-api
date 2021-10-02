@@ -50,4 +50,8 @@ export class PocheItem {
       this.isPrivate
     );
   }
+
+  static async delete(id: string) {
+    await db.queryObject(`DELETE FROM ${TABLE_NAME} WHERE id = $1`, id);
+  }
 }

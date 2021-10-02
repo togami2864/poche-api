@@ -21,8 +21,9 @@ export const pocheController = {
     context.response.body = pocheItem;
   },
 
-  delete(context: RouterContext) {
+  async delete(context: RouterContext) {
     const { id } = helpers.getQuery(context, { mergeParams: true });
-    context.response.body = `Delete item By ID: ${id}`;
+    await PocheItem.delete(id);
+    context.response.status = 204;
   },
 };
