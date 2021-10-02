@@ -1,20 +1,12 @@
-import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { Client } from "https://deno.land/x/postgres@v0.12.0/mod.ts";
+import "https://deno.land/x/dotenv@v2.0.0/load.ts";
 
-class Database {
-  client: typeof Client;
+const client = new Client({
+  user: Deno.env.get("USER_NAME")!,
+  database: Deno.env.get("DATABASE_NAME")!,
+  hostname: Deno.env.get("HOST_NAME")!,
+  port: Deno.env.get("PORT")!,
+});
+await client.connect();
 
-  constructor() {
-    this.connect();
-  }
-  async connect() {
-    this.client = new Client({
-      user: "user",
-      database: "poche_database",
-      hostname: "localhost",
-      port: 5432,
-    });
-    await this.client.connect();
-  }
-}
-
-export default new Database().client();
+export const db = client;

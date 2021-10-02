@@ -1,2 +1,5 @@
 # API test
 request.http
+
+# env
+.env
