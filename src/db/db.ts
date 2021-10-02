@@ -3,7 +3,7 @@ import "https://deno.land/x/dotenv@v2.0.0/load.ts";
 
 const client = new Client({
   user: Deno.env.get("USER_NAME")!,
-  password: "postgres",
+  password: Deno.env.get("PASSWORD")!,
   database: Deno.env.get("DATABASE_NAME")!,
   hostname: Deno.env.get("HOST_NAME")!,
   port: Deno.env.get("PORT")!,
