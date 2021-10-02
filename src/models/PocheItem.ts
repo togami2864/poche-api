@@ -4,7 +4,7 @@ import "https://deno.land/x/dotenv@v2.0.0/load.ts";
 const TABLE_NAME = `${Deno.env.get("TABLE_NAME")}`;
 
 interface PocheItemSchema {
-  _id: { $oid: string };
+  _id: string;
   _date: string;
   title: string;
   url: string;
@@ -25,7 +25,7 @@ export class PocheItem {
     public memo: string,
     public tags: string[],
     public isPrivate: boolean = false,
-    public _id: object | undefined = undefined,
+    public _id: string | undefined = undefined,
     public _date: string | undefined = undefined
   ) {}
 
