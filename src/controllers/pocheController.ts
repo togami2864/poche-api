@@ -9,10 +9,11 @@ export const pocheController = {
 
   async create(context: RouterContext) {
     const result = context.request.body();
-    const { title, url, memo, tags, isPrivate } = await result.value;
+    const { title, url, ogp, memo, tags, isPrivate } = await result.value;
     const pocheItem = await PocheItem.create({
       title,
       url,
+      ogp,
       memo,
       tags,
       isPrivate,

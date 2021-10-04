@@ -8,6 +8,7 @@ interface PocheItemSchema {
   _date: string;
   title: string;
   url: string;
+  ogp: string;
   memo: string;
   tags: string[];
   isPrivate: boolean;
@@ -15,13 +16,14 @@ interface PocheItemSchema {
 
 type Payload = Pick<
   PocheItemSchema,
-  "title" | "url" | "tags" | "isPrivate" | "memo"
+  "title" | "url" | "tags" | "isPrivate" | "memo" | "ogp"
 >;
 
 export class PocheItem {
   private constructor(
     public title: string,
     public url: string,
+    public ogp: string,
     public memo: string,
     public tags: string[],
     public isPrivate: boolean = false,
@@ -37,14 +39,15 @@ export class PocheItem {
     return items.rows;
   }
 
-  static create({ title, url, memo, tags, isPrivate }: Payload) {
-    return new this(title, url, memo, tags, isPrivate);
+  static create({ title, url, ogp, memo, tags, isPrivate }: Payload) {
+    return new this(title, url, memo, ogp, tags, isPrivate);
   }
   async save() {
     await db.queryObject(
-      `INSERT INTO ${TABLE_NAME} (title, url, memo, tags, private) VALUES ($1, $2, $3, $4, $5)`,
+      `INSERT INTO ${TABLE_NAME} (title, url, ogp, memo, tags, private) VALUES ($1, $2, $3, $4, $5, $6)`,
       this.title,
       this.url,
+      this.ogp,
       this.memo,
       this.tags,
       this.isPrivate
