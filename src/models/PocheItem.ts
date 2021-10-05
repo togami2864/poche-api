@@ -40,7 +40,7 @@ export class PocheItem {
   }
 
   static create({ title, url, ogp, memo, tags, isPrivate }: Payload) {
-    return new this(title, url, memo, ogp, tags, isPrivate);
+    return new this(title, url, ogp, memo, tags, isPrivate);
   }
   async save() {
     await db.queryObject(
